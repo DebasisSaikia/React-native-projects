@@ -1,11 +1,11 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, FlatList } from "react-native";
-import Header from "./components/Header";
-import Searchbar from "./components/Searchbar";
+import { SafeAreaView } from "react-native";
+import Header from "../components/Header";
+import Searchbar from "../components/Searchbar";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
-import CatList from "./components/CatList";
-import Restaurant from "./components/Restaurant";
+import CatList from "../components/CatList";
+import Restaurant from "../components/Restaurant";
 
 const catData = [
   {
@@ -38,7 +38,7 @@ const catData = [
   },
 ];
 
-export default function App() {
+export default function HomeScreen() {
   const [term, setTerm] = React.useState("Burger");
 
   return (

@@ -1,6 +1,14 @@
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import useRestaurants from "../custom-hooks/useRestaurants";
+import RestItem from "./ResItem";
 
 const Restaurant = ({ term }) => {
   const [{ data, loading, error }, searchRestaurants] = useRestaurants();
@@ -9,11 +17,22 @@ const Restaurant = ({ term }) => {
     searchRestaurants(term);
   }, [term]);
 
-  console.log(data);
   if (loading) return <ActivityIndicator size="large" marginVertical={30} />;
   return (
     <View style={style.container}>
       <Text style={style.header}>Top Restaurant</Text>
+      <FlatList
+        data={data}
+        keyExtractor={(restaurant) => restaurant.id}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item, index }) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Restaurant", { id: item.id })}
+          >
+            <RestItem restaurant={item} />
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 };
