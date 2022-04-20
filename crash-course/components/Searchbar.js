@@ -3,11 +3,24 @@ import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { shadowElevation } from "../common/styles";
 
-const Searchbar = () => {
+const Searchbar = ({ setTerm }) => {
+  const [input, setInput] = React.useState("");
+
+  const handleEditing = () => {
+    if (!input) return;
+    setTerm(input);
+    setInput("");
+  };
   return (
     <View style={[style.container, style.shadowElevation]}>
       <FontAwesome name="search" size={25} />
-      <TextInput style={style.input} placeholder="Search For Restaurent" />
+      <TextInput
+        style={style.input}
+        placeholder="Search For Restaurent"
+        value={input}
+        onChangeText={(text) => setInput(text)}
+        onEndEditing={handleEditing}
+      />
     </View>
   );
 };
