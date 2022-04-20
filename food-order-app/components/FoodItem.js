@@ -32,10 +32,10 @@ export const localRestaurants = [
   },
 ];
 
-const FoodItem = () => {
+const FoodItem = ({ restaurantData }) => {
   return (
     <>
-      {localRestaurants?.map((restaurant, index) => (
+      {restaurantData?.map((restaurant, index) => (
         <TouchableOpacity
           key={index}
           activeOpacity={1}
