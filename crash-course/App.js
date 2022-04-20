@@ -47,7 +47,7 @@ export default function App() {
       <Header />
       <Searchbar setTerm={setTerm} />
       <CatList categories={catData} setTerm={setTerm} term={term} />
-      <Restaurant />
+      <Restaurant term={term} />
       <StatusBar />
     </SafeAreaView>
   );
