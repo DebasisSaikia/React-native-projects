@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native'
+import { View, StyleSheet, Dimensions } from 'react-native'
 import React from 'react'
 import { getPopularMovies, getUpcomingMovies } from '../services/services';
 import { SliderBox } from "react-native-image-slider-box";
-
+import MoviesList from '../components/MoviesList';
 
 
 const HomePage = () => {
@@ -39,13 +39,8 @@ const [movieImages,setMovieImages]=React.useState([]);
       dotStyle={{height:0}}
       />
     </View>
-
     <View style={styles?.carousal}>
-     <FlatList data={popularMovies} 
-     renderItem={({item})=><Text>{item?.title}</Text>}
-      keyExtractor={item=>item?.id}
-      horizontal={true}
-      />
+      <MoviesList title={'Popular Movies'} content={popularMovies} />
     </View>
     </>
   )
