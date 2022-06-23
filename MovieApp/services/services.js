@@ -21,10 +21,10 @@ const getFamilyMovies=async()=>{
     return resp?.data?.results;
 }
 
-const topRated=async()=>{
-    const resp=await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=c8ea63bfce390916dfddd17da14a9ee8&with_genres=10751`)
-    return resp?.data?.results;
+const getDetails=async(movie_id)=>{
+    const resp=await axios.get(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=c8ea63bfce390916dfddd17da14a9ee8&language=en-US`)
+    return resp?.data;
 }
 
-export {getPopularMovies, getUpcomingMovies, getPopularTv, getFamilyMovies, topRated};
+export {getPopularMovies, getUpcomingMovies, getPopularTv, getFamilyMovies, getDetails};
 
