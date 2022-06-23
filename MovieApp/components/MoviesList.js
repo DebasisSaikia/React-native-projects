@@ -24,9 +24,11 @@ class MoviesList extends React.PureComponent {
 
 const styles=StyleSheet.create({
     text:{
-        fontSize:20,
+        fontSize:30,
         fontWeight:'bold',
         paddingBottom:20,
+        paddingTop:10,
+        paddingLeft:10,
         color:'rgba(0,0,0,0.8)'
     },
     movieList:{

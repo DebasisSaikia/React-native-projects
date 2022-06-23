@@ -11,5 +11,20 @@ const getUpcomingMovies=async()=>{
     return resp?.data?.results;
 }
 
-export {getPopularMovies, getUpcomingMovies};
+const getPopularTv=async()=>{
+    const resp=await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=c8ea63bfce390916dfddd17da14a9ee8&language=en-US&page=1`)
+    return resp?.data?.results;
+}
+
+const getFamilyMovies=async()=>{
+    const resp=await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=c8ea63bfce390916dfddd17da14a9ee8&with_genres=10751`)
+    return resp?.data?.results;
+}
+
+const topRated=async()=>{
+    const resp=await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=c8ea63bfce390916dfddd17da14a9ee8&with_genres=10751`)
+    return resp?.data?.results;
+}
+
+export {getPopularMovies, getUpcomingMovies, getPopularTv, getFamilyMovies, topRated};
 
