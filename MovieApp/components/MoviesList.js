@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import Card from './Card';
 class MoviesList extends React.PureComponent {
     render() {
-    const {title,content}=this.props
+    const {title,content, navigation}=this.props
         return (
             <View style={styles?.movieList}>
                 <View>
@@ -11,7 +11,7 @@ class MoviesList extends React.PureComponent {
                 </View>
             <View>
                 <FlatList data={content} 
-                    renderItem={({item})=><Card item={item} />}
+                    renderItem={({item})=><Card item={item} navigation={navigation} />}
                     keyExtractor={item=>item?.id}
                     horizontal={true}
                  />

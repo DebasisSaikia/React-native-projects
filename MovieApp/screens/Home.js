@@ -1,16 +1,18 @@
-import { View, StyleSheet, Dimensions, ScrollView } from 'react-native'
+import { View, StyleSheet, Dimensions, ScrollView, Text, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { getFamilyMovies, getPopularMovies, getPopularTv, getUpcomingMovies } from '../services/services';
 import { SliderBox } from "react-native-image-slider-box";
 import MoviesList from '../components/MoviesList';
+import Error from '../components/Error';
 
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
 const dimensions=Dimensions.get('screen');
-const [popularMovies,setPopularMovie]=React.useState('')
-const [popularTv,setPopularTv]=React.useState('')
-const [familyMovies,setFamilyMovies]=React.useState('')
+const [popularMovies,setPopularMovie]=React.useState([])
+const [popularTv,setPopularTv]=React.useState([])
+const [familyMovies,setFamilyMovies]=React.useState([])
 const [error,setError]=React.useState(false);
+const [loaded,setLoaded]=React.useState(false);
 const [movieImages,setMovieImages]=React.useState([]);
 
 const getAllData=()=>{
@@ -34,7 +36,10 @@ const getAllData=()=>{
           setFamilyMovies(getFamilyMovies);
           setPopularMovie(getPopularMovies);
           setPopularTv(getPopularTv);
-    }).catch((err)=>setError(err))
+          setLoaded(true)
+    }).catch(()=>setError(true)).finally(()=>{
+      setLoaded(true)
+    })
   },[])
 
   const sliderData=movieImages?.map((res)=>{
@@ -43,7 +48,9 @@ const getAllData=()=>{
 
   return (
     <ScrollView>
-    <View
+      {loaded && !error &&
+      <>
+      <View
       style={styles?.sliderContainer}>
      <SliderBox images={sliderData} sliderBoxHeight={dimensions?.height/1.5}
       autoplay={true} circleLoop={true}
@@ -51,14 +58,18 @@ const getAllData=()=>{
       />
     </View>
     <View style={styles?.carousal}>
-      <MoviesList title={'Popular Movies'} content={popularMovies} />
+      <MoviesList navigation={navigation} title={'Popular Movies'} content={popularMovies} />
     </View>
     <View style={styles?.carousal}>
-      <MoviesList title={'Popular Tv Shows'} content={popularTv} />
+      <MoviesList navigation={navigation} title={'Popular Tv Shows'} content={popularTv} />
     </View>
     <View style={styles?.carousal}>
-      <MoviesList title={'Family Movies'} content={familyMovies} />
+      <MoviesList navigation={navigation} title={'Family Movies'} content={familyMovies} />
     </View>
+      </>
+      }
+    {!loaded && <ActivityIndicator size="large" color={'green'}/>}
+    {error && <Error/> }
     </ScrollView>
   )
 }

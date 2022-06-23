@@ -3,9 +3,10 @@ import { TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
 import PlaceholderImg from '../assets/images/placeholder.png'
 class Card extends PureComponent {
     render() {
-        const {item}=this.props;
+        const {item,navigation}=this.props;
         return (
-            <TouchableOpacity style={styles?.cardContainer}>
+            <TouchableOpacity style={styles?.cardContainer} 
+            onPress={()=>navigation?.navigate('Details', {details:item})}>
                 <Image style={styles?.image} 
                 source={
                     {uri:`https://image.tmdb.org/t/p/w500`+item?.poster_path || PlaceholderImg}} 
