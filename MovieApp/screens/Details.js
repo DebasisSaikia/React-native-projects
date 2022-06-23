@@ -1,6 +1,7 @@
 import { Text, ScrollView, StyleSheet, Image, Dimensions, ActivityIndicator, View } from 'react-native'
 import React from 'react'
 import { getDetails } from '../services/services'
+import PlayButton from '../components/PlayButton';
 
 const dimension=Dimensions?.get('screen').height;
 
@@ -21,7 +22,6 @@ const Details = ({route,navigation}) => {
 
     <ScrollView>
     <View style={styles?.container}>
-    
     {!loaded && <ActivityIndicator size={'large'} color={'blue'} />}
      {loaded && 
      <>
@@ -31,6 +31,9 @@ const Details = ({route,navigation}) => {
          {uri:`https://image.tmdb.org/t/p/w500`+details?.poster_path}} 
      resizeMode="cover"
       />
+       <View>
+            <PlayButton/>
+        </View>
       <Text style={styles?.title}>{details?.title}</Text>
       <View>
         {details?.genres && (
@@ -42,7 +45,10 @@ const Details = ({route,navigation}) => {
                 })}
             </View>
         )}
+        <Text>{details?.vote_average}</Text>
       </View>
+     <Text style={styles?.overview}>{details?.overview}</Text>
+    
       </>
      } 
     </View>
@@ -65,7 +71,7 @@ const styles=StyleSheet.create({
     container:{
         flex: 1,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
     },
     genres:{
         flexDirection:'row',
@@ -74,6 +80,10 @@ const styles=StyleSheet.create({
     genre:{
         marginRight:10,
         fontWeight:'700'
+    },
+    overview:{
+        padding: 10,
+        fontWeight:'600'
     }
 })
 
